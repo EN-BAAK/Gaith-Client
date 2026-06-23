@@ -44,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
           <button
             onClick={closeSidebar}
-            className="absolute left-4 top-4 z-20 text-reversed/60 hover:text-reversed lg:hidden"
+            className="absolute left-4 top-4 z-20 text-reversed/60 hover:text-reversed lg:hidden cursor-pointer"
             aria-label="Close Sidebar"
           >
             <X size={20} />

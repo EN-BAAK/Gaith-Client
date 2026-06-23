@@ -37,9 +37,9 @@ const Toast: React.FC<ToastComponentProps> = ({
 
     return () => clearTimeout(timer);
   }, [onClose]);
-console.log(type.toLowerCase())
+
   const style = toastStyles[type.toLowerCase() as keyof typeof toastStyles];
-console.log(style)
+
   return (
     <div
       className={cn(
@@ -52,7 +52,7 @@ console.log(style)
     >
       <button
         onClick={onClose}
-        className="hover:bg-black/20 p-1 rounded-full text-white absolute top-2 right-2 transition cursor-pointer"
+        className="hover:bg-black/20 p-1 rounded-full absolute top-2 left-2 transition cursor-pointer"
         aria-label="Close"
       >
         <X size={20} />

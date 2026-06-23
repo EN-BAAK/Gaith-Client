@@ -9,3 +9,56 @@ export type User = {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface ColorEntity {
+  id: ID;
+  name: string;
+}
+
+export type ColorEntityCreation = {} & Omit<ColorEntity, "id">
+
+export interface SizeEntity {
+  id: ID;
+  name: string;
+}
+
+export type SizeEntityCreation = {} & Omit<SizeEntity, "id">
+
+export interface CategoryEntity {
+  id: ID;
+  name: string;
+  icon: string
+}
+
+export type CategoryEntityCreation = {} & Omit<CategoryEntity, "id">
+
+export interface BrandEntity {
+  id: ID;
+  name: string;
+  imgUrl: string
+}
+
+export type BrandEntityCreation = {} & Omit<BrandEntity, "id" | "imgUrl">
+
+export interface SiteEntity {
+  id: ID;
+  name: string;
+}
+
+export type SiteEntityCreation = {} & Omit<SiteEntity, "id" | "imgUrl">
+
+export interface BranchEntity {
+  id: ID;
+  name: string;
+  location?: string;
+  facebook?: string;
+  instagram?: string;
+  phone?: string;
+  telephone?: string;
+  groupId?: ID;
+  group?: string
+}
+
+export type BranchEntityGlobal = {} & Omit<BranchEntity, "groupId">
+
+export type BranchEntityCreation = Omit<BranchEntity, "id" | "group">;

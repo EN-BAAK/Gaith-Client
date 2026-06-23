@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/api-client";
+
 export const handlePhoneCall = (phoneNumber: string) => {
   if (!phoneNumber) return;
 
@@ -56,3 +58,7 @@ export const formatBalance = (value: number): string => {
   const formatted = value / 1_000_000;
   return `${removeTrailingZeros(formatted)}m$`;
 };
+
+export const getImageUrl = (imgUrl: string): string => {
+  return `${BASE_URL}/${imgUrl}`
+}

@@ -74,7 +74,7 @@ const IconSelectionField: React.FC<IconSelectionFieldProps> = ({
                       className={cn(
                         "flex items-center justify-center h-12 w-12 rounded-lg border transition-all duration-200",
                         isSelected
-                          ? "border-primary bg-primary text-background"
+                          ? "border-accent bg-accent text-reversed"
                           : "border-muted hover:border-primary hover:bg-primary/10",
                         disabled &&
                         "cursor-not-allowed"

@@ -1,3 +1,4 @@
+import { ID } from "@/types/global";
 import { UseMutationOptions } from "@tanstack/react-query"
 
 export type MutationProps<TData = unknown, TError = unknown, TVariables = void, TContext = unknown> = {
@@ -31,4 +32,14 @@ export type QueryKey = string | number
 
 export type ReactQueryProviderProps = {
   children: React.ReactNode
+}
+
+export type UpdateItemType<T> = {
+  id: ID,
+  data: Partial<T>
+}
+
+export type UpdateItemWithFormData = {
+  id: ID,
+  data: FormData
 }

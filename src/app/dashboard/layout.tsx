@@ -2,6 +2,7 @@ import { CommonParentProps } from "@/types/global";
 import type { Metadata } from "next";
 import React from "react";
 import DashboardLayoutClient from "./DashboardLayoutClient";
+import OffsetProvider from "@/libraries/offset/OffsetsProvider";
 
 export const metadata: Metadata = {
   title: "لوحة التحكم | الغيث للأقمشة الفاخرة",
@@ -71,7 +72,9 @@ export const metadata: Metadata = {
 
 const DashboardLayout: React.FC<CommonParentProps> = ({ children }) => {
   return (
-    <DashboardLayoutClient>{children}</DashboardLayoutClient>
+    <OffsetProvider>
+      <DashboardLayoutClient>{children}</DashboardLayoutClient>
+    </OffsetProvider>
   )
 };
 

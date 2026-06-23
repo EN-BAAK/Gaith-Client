@@ -28,7 +28,7 @@ const Header: React.FC<DashboardHeaderProps> = ({ setSidebarOpen }) => {
     <header className="bg-card border-b border-background2 px-6 py-4 flex items-center justify-between shrink-0 z-20">
       <div className="flex items-center gap-3">
         <button
-          className="lg:hidden p-2 hover:bg-background2 rounded-lg text-text"
+          className="lg:hidden p-2 hover:bg-background2 rounded-lg text-text cursor-pointer"
           onClick={() => setSidebarOpen(true)}
           aria-label="Open Sidebar"
         >
