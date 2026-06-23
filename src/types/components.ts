@@ -5,3 +5,7 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 export type ArabicPatterProps = {
   id: string; color?: string; opacity?: number;
 }
+
+export type DashboardHeaderProps = {
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}

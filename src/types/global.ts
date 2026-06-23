@@ -16,3 +16,16 @@ export enum ROLE {
 }
 
 export type ID = string
+
+export interface NavItem {
+  title: string;
+  href: string;
+  icon: React.ElementType;
+}
+
+export interface AccessItem {
+  authorized: boolean;
+  path: string;
+  roles: ROLE[];
+  children?: AccessItem[];
+}
