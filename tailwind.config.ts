@@ -20,6 +20,7 @@ const config: Config = {
         accent: "#B08D57",
         background: "#FAF7F2",
         background2: "#F3EEE7",
+        reversed: "#ffffff",
         card: "#FFFFFF",
         text: "#2A2520",
 

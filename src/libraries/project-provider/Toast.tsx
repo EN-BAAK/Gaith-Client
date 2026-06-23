@@ -7,24 +7,20 @@ import { ToastComponentProps } from "./types";
 
 const toastStyles = {
   success: {
-    bg: "bg-success",
     text: "text-success",
-    title: "Success",
+    title: "نجاح",
   },
-  danger: {
-    bg: "bg-danger",
+  error: {
     text: "text-danger",
-    title: "Error",
+    title: "خطأ",
   },
   warning: {
-    bg: "bg-warning",
     text: "text-warning",
-    title: "Warning",
+    title: "تحذير",
   },
   info: {
-    bg: "bg-info",
     text: "text-info",
-    title: "Info",
+    title: "اشعار",
   },
 };
 
@@ -41,14 +37,13 @@ const Toast: React.FC<ToastComponentProps> = ({
 
     return () => clearTimeout(timer);
   }, [onClose]);
-
+console.log(type.toLowerCase())
   const style = toastStyles[type.toLowerCase() as keyof typeof toastStyles];
-
+console.log(style)
   return (
     <div
       className={cn(
-        "w-80 p-4 rounded-2xl shadow-lg absolute z-50 transition-all duration-300 ease-in-out animate-in slide-in-from-left-5",
-        style.bg
+        "w-80 p-4 rounded-2xl shadow-lg absolute z-50 transition-all duration-300 ease-in-out animate-in slide-in-from-left-5 bg-background",
       )}
       style={{
         top: `${index * 90 + 16}px`,

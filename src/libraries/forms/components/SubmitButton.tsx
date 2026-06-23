@@ -67,7 +67,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "w-full py-6 transition cursor-pointer",
+        "w-full rounded-xl py-3.5 transition cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed",
         variantClasses[variant],
         className
       )}

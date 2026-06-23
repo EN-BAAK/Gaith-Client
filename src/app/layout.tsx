@@ -3,6 +3,8 @@ import { Cairo, IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic, } from "next/font/google
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { CommonParentProps } from "@/types/global"
+import ReactQueryProvider from "@/libraries/react-query/ReactQueryProvidder"
+import AppProvider from "@/libraries/project-provider/AppProvider"
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -40,7 +42,11 @@ export default function RootLayout({ children, }: Readonly<CommonParentProps>) {
       )}
     >
       <body className="min-h-full flex flex-col bg-background text-text font-sans">
-        {children}
+        <ReactQueryProvider>
+          <AppProvider>
+            {children}
+          </AppProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   )
