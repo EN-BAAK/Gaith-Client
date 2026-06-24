@@ -30,7 +30,7 @@ const EditProductForm: React.FC = () => {
   const [productImage, setProductImage] = useState<File | null | undefined | string>(undefined);
 
   const { mutateAsync } = useUpdateProductSettings();
-  const { data: productRes, isFetching: isFetchingProduct } = useGetProductByIdSettings(id);
+  const { data: productRes, isFetching: isFetchingProduct } = useGetProductByIdSettings(id.toString());
   const { data: categoriesData } = useGetAllCategories();
   const { data: brandsData } = useGetAllBrands();
   const { data: colorsData } = useGetAllColorsSettings();
@@ -54,8 +54,8 @@ const EditProductForm: React.FC = () => {
     wholesalePrice: product.wholesalePrice,
     summarize: product.summarize,
     description: product.description,
-    categoryId: product.categoryId || "",
-    brandId: product.brandId || "",
+    categoryId: product.category?.id || "",
+    brandId: product.brand?.id || "",
     colors: product.colors?.map((c: ColorEntity) => ({ id: c.id, state: "old" })) || [],
     sizes: product.sizes?.map((s: SizeEntity) => ({ id: s.id, state: "old" })) || [],
   } : null;
