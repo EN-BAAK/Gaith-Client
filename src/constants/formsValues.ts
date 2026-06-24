@@ -1,5 +1,5 @@
 import { ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, VerifyAccountProps } from "@/types/forms";
-import { BranchEntityCreation, BrandEntityCreation, CategoryEntityCreation, ColorEntityCreation, SiteEntityCreation, SizeEntityCreation } from "@/types/models";
+import { BranchEntityCreation, BrandEntityCreation, CategoryEntityCreation, ColorEntityCreation, ProductEntityCreation, SiteEntityCreation, SizeEntityCreation } from "@/types/models";
 
 export const loginInItalValues: LoginProps = {
   email: "",
@@ -55,4 +55,16 @@ export const initialBranchCreationValues: BranchEntityCreation = {
   phone: "",
   telephone: "",
   groupId: "",
+};
+
+export const initialProductCreationValues: ProductEntityCreation = {
+  title: "",
+  retailPrice: 0,
+  wholesalePrice: 0,
+  summarize: "",
+  description: "",
+  categoryId: "",
+  brandId: "",
+  colors: [],
+  sizes: [],
 };

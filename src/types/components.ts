@@ -1,5 +1,5 @@
 import { CommonParentProps, ID } from "./global";
-import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, SiteEntity, SizeEntity, User } from "./models";
+import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, ProductEntity, SiteEntity, SizeEntity, User } from "./models";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "text" | "rectangular" | "circular" | "pattern"
@@ -98,4 +98,16 @@ export interface DashboardBranchSectionProps {
 
 export interface DashboardUsersRowProps {
   user: User;
+}
+
+export interface DashboardProductCardProps {
+  product: ProductEntity;
+  onDelete: () => void;
+  isDeleting: boolean;
+  onEdit: () => void;
+  onView: () => void
+}
+
+export type FormatTextProps = {
+  text: string
 }

@@ -16,6 +16,8 @@ export type Variant =
   | "danger-outline"
   | "warning"
   | "warning-outline"
+  | "info"
+  | "info-outline"
   | "transparent"
   | "transparent-outline"
   | "primary-gradient"
@@ -132,4 +134,24 @@ export interface CustomButtonProps {
 export interface MultiSelectorFieldProps extends BaseFieldProps {
   maxSelection?: number;
   options: SelectOption[]
+}
+
+export type ChoiceOption = {
+  id: string;
+  key: string;
+};
+
+export type AdvancedMultiSelectFieldStateValue = {
+  id: string;
+  state: "old" | "new" | "remove";
+};
+
+export interface AdvancedMultiSelectFieldProps {
+  name: string;
+  label?: string;
+  options: ChoiceOption[];
+  styles?: string;
+  labelStyle?: string;
+  innerDivStyle?: string;
+  isColor?: boolean
 }

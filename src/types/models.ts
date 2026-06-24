@@ -1,4 +1,4 @@
-import { ID, ROLE } from "./global"
+import { ID, ROLE, SelectedItemState } from "./global"
 
 export type User = {
   id: ID,
@@ -62,3 +62,41 @@ export interface BranchEntity {
 export type BranchEntityGlobal = {} & Omit<BranchEntity, "groupId">
 
 export type BranchEntityCreation = Omit<BranchEntity, "id" | "group">;
+
+export interface ProductEntity {
+  id: ID;
+  title: string;
+  retailPrice: number;
+  wholesalePrice: number;
+  summarize: string;
+  description: string;
+  brandImgUrl?: string
+  imgUrl: string;
+  categoryId?: ID,
+  brandId?: ID,
+  category?: { id: ID; name: string };
+  brand?: { id: ID; name: string, imgUrl: string };
+  colors: { id: ID; name: string }[];
+  sizes: { id: ID; name: string }[];
+}
+
+export type ProductEntityCreation = Omit<ProductEntity, "id" | "category" | "brand" | "colors" | "sizes" | "imgUrl" | "categoryId" | "brandId"> & {
+  categoryId: string;
+  brandId: string;
+  colors: SelectedItemState[];
+  sizes: SelectedItemState[];
+};
+
+export interface ProductEntityGlobal {
+  id: ID;
+  title: string;
+  price: number;
+  categoryId: ID;
+  brandId: ID;
+  imgUrl: string;
+  category: string;
+  brand: string;
+  colors: string[];
+  sizes: string[];
+}
+

@@ -26,3 +26,18 @@ export type ResetPasswordProps = {
   otp: string,
   password: string
 }
+
+export interface UserProductsQueryParams {
+  limit: number;
+  page: number;
+  search?: string;
+  categoryId?: number;
+  brandId?: number;
+}
+
+export interface AdminProductsQueryParams {
+  limit: number;
+  page: number;
+  offsetUnit: number;
+  search?: string;
+}

@@ -45,6 +45,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     "warning-outline":
       "border border-warning bg-transparent text-warning hover:bg-warning/10",
 
+    info:
+      "bg-info text-background hover:opacity-90",
+
+    "info-outline":
+      "border border-info bg-transparent text-info hover:bg-info/10",
+
     transparent:
       "bg-transparent text-text hover:opacity-75",
 

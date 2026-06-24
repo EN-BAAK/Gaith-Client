@@ -95,3 +95,38 @@ export const validationBranchModifySchema = Yup.object({
   phone: Yup.string().optional(),
   telephone: Yup.string().optional(),
 });
+
+export const validationProductModifySchema = Yup.object({
+  title: Yup.string()
+    .min(3, "عنوان المنتج قصير جداً")
+    .max(100, "عنوان المنتج طويل جداً")
+    .required("يرجى إدخال عنوان المنتج"),
+  retailPrice: Yup.number()
+    .positive("يجب أن يكون سعر المفرق أكبر من صفر")
+    .required("يرجى إدخال سعر المفرق"),
+  wholesalePrice: Yup.number()
+    .positive("يجب أن يكون سعر الجملة أكبر من صفر")
+    .required("يرجى إدخال سعر الجملة"),
+  summarize: Yup.string()
+    .min(10, "الوصف المختصر يجب أن لا يقل عن 10 أحرف")
+    .required("يرجى إدخال وصف مختصر للمنتج"),
+  description: Yup.string()
+    .min(20, "الوصف الكامل يجب أن لا يقل عن 20 حرفاً")
+    .required("يرجى إدخال الوصف الكامل للمنتج"),
+  categoryId: Yup.string()
+    .required("يرجى اختيار فئة المنتج"),
+  brandId: Yup.string()
+    .required("يرجى اختيار الماركة التجارية"),
+  colors: Yup.array().of(
+    Yup.object({
+      id: Yup.string().required(),
+      state: Yup.string().oneOf(["old", "new", "remove"]).required(),
+    })
+  ),
+  sizes: Yup.array().of(
+    Yup.object({
+      id: Yup.string().required(),
+      state: Yup.string().oneOf(["old", "new", "remove"]).required(),
+    })
+  ),
+});

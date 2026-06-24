@@ -1,8 +1,8 @@
 import { setSessionItem } from "@/lib/helpers";
 import { CachedUser, ID } from "@/types/global";
-import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal } from "./types/models";
+import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal, ProductEntityGlobal, ProductEntity } from "./types/models";
 import { APIResponse, UpdateItemType, UpdateItemWithFormData } from "./libraries/react-query/types";
-import { ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, VerifyAccountAPIProps } from "./types/forms";
+import { AdminProductsQueryParams, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const API_URL = `${BASE_URL}/${process.env.NEXT_PUBLIC_API_VERSION}`
@@ -505,5 +505,73 @@ export const getVerifiedUsersSettings = async (): Promise<APIResponse<User[]>> =
 
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message || "Failed to fetch verified users");
+  return responseBody;
+};
+
+export const getAllProducts = async ({ limit, page, search, categoryId, brandId }: UserProductsQueryParams) => {
+  let url = `${API_URL}/products?page=${page}&limit=${limit}`;
+  if (search) url += `&search=${encodeURIComponent(search)}`;
+  if (categoryId) url += `&categoryId=${categoryId}`;
+  if (brandId) url += `&brandId=${brandId}`;
+
+  const response = await fetch(url);
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch products");
+  return responseBody;
+};
+
+export const getProductById = async (id: ID): Promise<APIResponse<ProductEntityGlobal>> => {
+  const response = await fetch(`${API_URL}/products/${id}`);
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch product");
+  return responseBody;
+};
+
+export const getAllProductsSettings = async ({ limit, page, offsetUnit = 0, search }: AdminProductsQueryParams) => {
+  let url = `${API_URL}/products/settings?p=${page}&l=${limit}&o=${offsetUnit}`;
+  if (search) url += `&s=${encodeURIComponent(search)}`;
+
+  const response = await fetch(url, { credentials: "include" });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch products settings");
+  return responseBody;
+};
+
+export const getProductByIdSettings = async (id: ID): Promise<APIResponse<ProductEntity>> => {
+  const response = await fetch(`${API_URL}/products/${id}/settings`, { credentials: "include" });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch product settings");
+  return responseBody;
+};
+
+export const createProductSettings = async (formData: FormData): Promise<APIResponse<ProductEntity>> => {
+  const response = await fetch(`${API_URL}/products`, {
+    method: "POST",
+    credentials: "include",
+    body: formData,
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to create product");
+  return responseBody;
+};
+
+export const updateProductSettings = async ({ id, data }: UpdateItemWithFormData): Promise<APIResponse<ProductEntity>> => {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: "PUT",
+    credentials: "include",
+    body: data,
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to update product");
+  return responseBody;
+};
+
+export const deleteProductByIdSettings = async (id: ID): Promise<APIResponse<ProductEntity>> => {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to delete product");
   return responseBody;
 };

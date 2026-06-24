@@ -29,3 +29,8 @@ export interface AccessItem {
   roles: ROLE[];
   children?: AccessItem[];
 }
+
+export interface SelectedItemState {
+  id: ID;
+  state: "old" | "new" | "remove";
+}
