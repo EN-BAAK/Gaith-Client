@@ -100,7 +100,7 @@ const AdvancedMultiSelectField: React.FC<AdvancedMultiSelectFieldProps> = ({
           <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
             اختياراتك
           </h4>
-          <div className="flex flex-wrap gap-2 min-h-[40px] p-2 bg-white rounded-lg border border-dashed border-gray-200">
+          <div className="flex flex-wrap gap-2 min-h-[40px] p-2 bg-reversed rounded-lg border border-dashed border-gray-200">
             {selectedItems.length === 0 && removedItems.length === 0 && (
               <span className="text-xs text-gray-400 my-auto pl-1">لم يتم تحديد أي عناصر بعد.</span>
             )}
@@ -145,7 +145,7 @@ const AdvancedMultiSelectField: React.FC<AdvancedMultiSelectFieldProps> = ({
                   type="button"
                   onClick={() => handleSelect(opt.id)}
                   className={cn(
-                    "flex items-center gap-1.5 px-3 py-1 text-sm rounded-lg border bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-all shadow-sm",
+                    "flex items-center gap-1.5 px-3 py-1 text-sm rounded-lg border bg-reversed text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-all shadow-sm",
                     isRemovedPreviously && "border-red-200 hover:border-red-400 bg-red-50/30"
                   )}
                   title={isColor ? opt.key : undefined}

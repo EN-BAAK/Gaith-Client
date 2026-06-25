@@ -509,8 +509,8 @@ export const getVerifiedUsersSettings = async (): Promise<APIResponse<User[]>> =
 };
 
 export const getAllProducts = async ({ limit, page, search, categoryId, brandId }: UserProductsQueryParams) => {
-  let url = `${API_URL}/products?page=${page}&limit=${limit}`;
-  if (search) url += `&search=${encodeURIComponent(search)}`;
+  let url = `${API_URL}/products?p=${page}&l=${limit}`;
+  if (search) url += `&s=${encodeURIComponent(search)}`;
   if (categoryId) url += `&categoryId=${categoryId}`;
   if (brandId) url += `&brandId=${brandId}`;
 

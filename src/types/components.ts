@@ -1,5 +1,5 @@
 import { CommonParentProps, ID } from "./global";
-import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, ProductEntity, SiteEntity, SizeEntity, User } from "./models";
+import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "text" | "rectangular" | "circular" | "pattern"
@@ -110,4 +110,45 @@ export interface DashboardProductCardProps {
 
 export type FormatTextProps = {
   text: string
+}
+
+export interface ShopFilterProps {
+  categories: CategoryEntity[];
+  selectedCategory: ID | undefined;
+  onSelectCategory: (id: ID | undefined) => void;
+  brands: BrandEntity[];
+  selectedBrand: ID | undefined;
+  onSelectBrand: (id: ID | undefined) => void;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface ShopCategoryListProps {
+  categories: CategoryEntity[];
+  selectedCategory: ID | undefined;
+  onSelectCategory: (id: ID | undefined) => void;
+  onCloseModal?: () => void;
+}
+
+export interface ShopProductProps {
+  product: ProductEntityGlobal;
+  onAddToBasket?: (product: ProductEntityGlobal) => void;
+}
+
+export interface ShopBrandListProps {
+  brands: BrandEntity[];
+  selectedBrand: ID | undefined;
+  onSelectBrand: (id: ID | undefined) => void;
+  onCloseModal?: () => void;
+}
+
+export type ShopFilterContentProps = {
+  categories: CategoryEntity[];
+  selectedCategory: ID | undefined;
+  onSelectCategory: (id: ID | undefined) => void;
+  brands: BrandEntity[];
+  selectedBrand: ID | undefined;
+  onSelectBrand: (id: ID | undefined) => void;
+  isMobile?: boolean,
+  onClose: () => void;
 }

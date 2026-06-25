@@ -1,3 +1,5 @@
+import { ID } from "./global"
+
 export type LoginProps = {
   email: string,
   password: string
@@ -31,8 +33,8 @@ export interface UserProductsQueryParams {
   limit: number;
   page: number;
   search?: string;
-  categoryId?: number;
-  brandId?: number;
+  categoryId?: ID;
+  brandId?: ID;
 }
 
 export interface AdminProductsQueryParams {

@@ -15,7 +15,7 @@ const Warning: React.FC<WarningProps> = ({
 }) => {
   return (
     <div className="bg-black/40 flex items-center justify-center fixed inset-0 z-50">
-      <div className="bg-white w-full max-w-md p-5 border border-black rounded-2xl shadow-xl animate-in zoom-in">
+      <div className="bg-reversed w-full max-w-md p-5 border border-black rounded-2xl shadow-xl animate-in zoom-in">
         <div className="mb-4 pb-3 flex items-center gap-2 border-b border-black">
           <AlertTriangle className="text-yellow-500" size={40} />
           <h2 className="font-bold text-xl text-black">تحذير</h2>
@@ -31,11 +31,11 @@ const Warning: React.FC<WarningProps> = ({
               styleBtn1 === "secondary" &&
               "bg-gray-200 hover:bg-gray-300 text-black",
               styleBtn1 === "default" &&
-              "bg-blue-600 hover:bg-blue-700 text-white",
+              "bg-blue-600 hover:bg-blue-700 text-reversed",
               styleBtn1 === "outline" &&
-              "border border-gray-400 bg-white hover:bg-gray-100 text-black",
+              "border border-gray-400 bg-reversed hover:bg-gray-100 text-black",
               styleBtn1 === "destructive" &&
-              "bg-red-600 hover:bg-red-700 text-white"
+              "bg-red-600 hover:bg-red-700 text-reversed"
             )}
           >
             {btn1}
@@ -51,13 +51,13 @@ const Warning: React.FC<WarningProps> = ({
               styleBtn2 === "secondary" &&
               "bg-gray-200 hover:bg-gray-300 text-black",
               styleBtn2 === "default" &&
-              "bg-blue-600 hover:bg-blue-700 text-white",
+              "bg-blue-600 hover:bg-blue-700 text-reversed",
               styleBtn2 === "outline" &&
-              "border border-gray-400 bg-white hover:bg-gray-100 text-black",
+              "border border-gray-400 bg-reversed hover:bg-gray-100 text-black",
               styleBtn2 === "destructive" &&
-              "bg-red-600 hover:bg-red-700 text-white",
+              "bg-red-600 hover:bg-red-700 text-reversed",
               styleBtn2 === "main" &&
-              "bg-main hover:bg-main-hover text-white"
+              "bg-main hover:bg-main-hover text-reversed"
             )}
           >
             {btn2}

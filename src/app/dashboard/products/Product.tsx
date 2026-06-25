@@ -57,7 +57,7 @@ const Product: React.FC<DashboardProductCardProps> = ({ product, onDelete, isDel
             ) : (
               <Award className="w-3.5 h-3.5 text-accent" />
             )}
-            <span>{product.brand?.name || "بدون علامة"}</span>
+            <span className="text-brand">{product.brand?.name || "بدون علامة"}</span>
           </div>
 
           {product.colors && product.colors.length > 0 && (

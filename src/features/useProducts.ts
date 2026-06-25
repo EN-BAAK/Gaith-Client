@@ -31,7 +31,7 @@ const clearFilteredProductsCache = (queryClient: QueryClient) => {
   });
 };
 
-export const useGetAllProducts = (limit: number, search?: string, categoryId?: number, brandId?: number) => {
+export const useGetAllProducts = (limit: number, search?: string, categoryId?: ID, brandId?: ID) => {
   return useInfiniteQuery({
     queryKey: [userBaseKey, { search, categoryId, brandId }],
     queryFn: ({ pageParam = 1 }) =>

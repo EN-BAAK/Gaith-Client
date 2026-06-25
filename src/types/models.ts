@@ -91,11 +91,11 @@ export interface ProductEntityGlobal {
   id: ID;
   title: string;
   price: number;
-  categoryId: ID;
-  brandId: ID;
   imgUrl: string;
+  summarize: string;
+  description: string;
   category: string;
-  brand: string;
+  brand?: { name: string, imgUrl: string };
   colors: string[];
   sizes: string[];
 }
