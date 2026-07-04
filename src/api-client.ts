@@ -1,8 +1,8 @@
 import { setSessionItem } from "@/lib/helpers";
 import { CachedUser, ID } from "@/types/global";
-import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal, ProductEntityGlobal, ProductEntity } from "./types/models";
+import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal, ProductEntityGlobal, ProductEntity, OrderEntity, OrderItemEntityCreation } from "./types/models";
 import { APIResponse, UpdateItemType, UpdateItemWithFormData } from "./libraries/react-query/types";
-import { AdminProductsQueryParams, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
+import { AdminOrderQueryParams, AdminProductsQueryParams, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const API_URL = `${BASE_URL}/${process.env.NEXT_PUBLIC_API_VERSION}`
@@ -573,5 +573,77 @@ export const deleteProductByIdSettings = async (id: ID): Promise<APIResponse<Pro
   });
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message || "Failed to delete product");
+  return responseBody;
+};
+
+export const getUserOrders = async (): Promise<APIResponse<OrderEntity[]>> => {
+  const response = await fetch(`${API_URL}/orders/user`, {
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch user orders");
+  return responseBody;
+};
+
+export const getUserOrderById = async (id: ID): Promise<APIResponse<OrderEntity>> => {
+  const response = await fetch(`${API_URL}/orders/user/${id}`, {
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch user order details");
+  return responseBody;
+};
+
+export const getAllOrdersSettings = async ({ limit, page }: AdminOrderQueryParams) => {
+  const url = `${API_URL}/orders?p=${page}&l=${limit}`;
+
+  const response = await fetch(url, {
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch all orders");
+  return responseBody;
+};
+
+export const getOrderByIdSettings = async (id: ID): Promise<APIResponse<OrderEntity>> => {
+  const response = await fetch(`${API_URL}/orders/${id}`, {
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch order details");
+  return responseBody;
+};
+
+export const createOrder = async (data: { items: OrderItemEntityCreation[] }): Promise<APIResponse<OrderEntity>> => {
+  const response = await fetch(`${API_URL}/orders`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to create order");
+  return responseBody;
+};
+
+export const deleteOrderByIdSettings = async (id: ID): Promise<APIResponse<OrderEntity>> => {
+  const response = await fetch(`${API_URL}/orders/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to delete order");
+  return responseBody;
+};
+
+export const updateOrder = async ({ id, data }: UpdateItemType<OrderEntity>): Promise<APIResponse<OrderEntity>> => {
+  const response = await fetch(`${API_URL}/orders/${id}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to update order");
   return responseBody;
 };

@@ -43,3 +43,8 @@ export interface AdminProductsQueryParams {
   offsetUnit: number;
   search?: string;
 }
+
+export interface AdminOrderQueryParams {
+  limit: number,
+  page: number
+}

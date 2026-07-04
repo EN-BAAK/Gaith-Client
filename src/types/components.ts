@@ -1,5 +1,5 @@
 import { CommonParentProps, ID } from "./global";
-import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
+import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, OrderEntity, OrderItemEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "text" | "rectangular" | "circular" | "pattern"
@@ -133,6 +133,7 @@ export interface ShopCategoryListProps {
 export interface ShopProductProps {
   product: ProductEntityGlobal;
   onAddToBasket?: (product: ProductEntityGlobal) => void;
+  gotToProduct?: () => void
 }
 
 export interface ShopBrandListProps {
@@ -151,4 +152,30 @@ export type ShopFilterContentProps = {
   onSelectBrand: (id: ID | undefined) => void;
   isMobile?: boolean,
   onClose: () => void;
+}
+
+export type HeaderProps = {
+  NestedElements?: React.ReactNode
+}
+
+export type ShopNestedHeaderElementProps = {
+  search: string,
+  setSearch: (s: string) => void,
+  hasActiveFilters?: boolean,
+  openFilter: () => void
+}
+
+export interface DashboardOrderSidebarProps {
+  orders: OrderEntity[];
+  activeOrderId: ID | null;
+  onSelectOrder: (id: ID) => void;
+}
+
+export type DashboardOrderItemRowProps = {
+  item: OrderItemEntity;
+}
+
+export type DashboardOrderItemsProps = {
+  orderId: ID;
+  closeOrder: () => void
 }

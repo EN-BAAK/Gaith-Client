@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { HeaderProps } from "@/types/components";
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({ NestedElements }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -39,7 +40,18 @@ const Header: React.FC = () => {
       >
 
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-          <div className="md:block hidden" />
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 hover:bg-background2 rounded-xl transition-colors text-muted hover:text-text cursor-pointer"
+              aria-label="تصفح القائمة"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {NestedElements ? NestedElements
+            : <div className="md:block hidden" />}
 
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -56,20 +68,9 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 hover:bg-background2 rounded-xl transition-colors text-muted hover:text-text cursor-pointer"
-              aria-label="تصفح القائمة"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-
           <div className="flex items-center gap-2">
             <Link href="/" className="brand flex items-center gap-2 cursor-pointer group">
-              <span className="font-bold">الغيث للمنسوجات</span>
+              <span className="font-bold md:block hidden">الغيث للمنسوجات</span>
               <div className="w-9 h-9 bg-primary rounded-md flex items-center justify-center">
                 <span className="text-accent">غ</span>
               </div>

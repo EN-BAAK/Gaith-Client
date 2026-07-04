@@ -24,41 +24,45 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
   else if (disabled) buttonLabel = disabledLabel
 
   const variantClasses: Record<Variant, string> = {
-    primary: "bg-primary text-background hover:bg-primary/90",
+    primary: "bg-primary text-reversed hover:bg-primary/90",
     "primary-outline":
-      "border border-primary text-primary hover:bg-primary hover:text-background",
+      "border border-primary text-primary hover:bg-primary hover:text-reversed",
 
-    accent: "bg-accent text-background hover:bg-accent/90",
+    accent: "bg-accent text-reversed hover:bg-accent/90",
     "accent-outline":
-      "border border-accent text-accent hover:bg-accent hover:text-background",
+      "border border-accent text-accent hover:bg-accent hover:text-reversed",
 
-    success: "bg-green-600 text-background hover:bg-green-500",
+    success: "bg-green-600 text-reversed hover:bg-green-500",
     "success-outline":
-      "border border-green-600 text-green-600 hover:bg-green-600 hover:text-background",
+      "border border-green-600 text-green-600 hover:bg-green-600 hover:text-reversed",
 
-    danger: "bg-danger text-background hover:bg-danger/90",
+    danger: "bg-danger text-reversed hover:bg-danger/90",
     "danger-outline":
-      "border border-danger text-danger hover:bg-danger hover:text-background",
+      "border border-danger text-danger hover:bg-danger hover:text-reversed",
 
-    warning: "bg-yellow-500 text-background hover:bg-yellow-400",
+    warning: "bg-warning text-reversed hover:bg-warning/90",
     "warning-outline":
-      "border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-background",
+      "border border-warning text-warning hover:bg-warning hover:text-reversed",
+
+    info: "bg-info text-reversed hover:bg-info/90",
+    "info-outline":
+      "border bg-info text-info hover:bg-info hover:text-reversed",
 
     transparent: "bg-transparent text-foreground hover:text-foreground/70",
     "transparent-outline":
-      "border border-foreground/40 text-background hover:border-foreground hover:text-background",
+      "border border-foreground/40 text-reversed hover:border-foreground hover:text-reversed",
 
     "primary-gradient":
-      "bg-gradient-to-r from-primary to-green-600 text-background hover:opacity-90",
+      "bg-gradient-to-r from-primary to-green-600 text-reversed hover:opacity-90",
 
     "primary-gradient-outline":
-      "border border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-green-600 hover:text-background",
+      "border border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-green-600 hover:text-reversed",
 
     "accent-gradient":
-      "bg-gradient-to-r from-accent to-red-600 text-background hover:opacity-90",
+      "bg-gradient-to-r from-accent to-red-600 text-reversed hover:opacity-90",
 
     "accent-gradient-outline":
-      "border border-accent text-accent hover:bg-gradient-to-r hover:from-accent hover:to-red-600 hover:text-background",
+      "border border-accent text-accent hover:bg-gradient-to-r hover:from-accent hover:to-red-600 hover:text-reversed",
   }
 
   return (

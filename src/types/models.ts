@@ -1,4 +1,4 @@
-import { ID, ROLE, SelectedItemState } from "./global"
+import { ID, OrderStatus, ROLE, SelectedItemState } from "./global"
 
 export type User = {
   id: ID,
@@ -100,3 +100,24 @@ export interface ProductEntityGlobal {
   sizes: string[];
 }
 
+export interface OrderEntity {
+  id: ID,
+  status: OrderStatus,
+  invoiceDiscountPercent: number,
+  isPaid: boolean,
+  items: OrderItemEntity[],
+  createdAt: string,
+  updatedAt: string
+}
+
+export type OrderEntityCreation = Omit<OrderEntity, "id"> & {}
+
+export interface OrderItemEntity {
+  id: ID,
+  quantity: number,
+  unitPrice: number,
+  itemDiscountPercent: number,
+  productId: ID
+}
+
+export type OrderItemEntityCreation = Omit<OrderItemEntity, "id"> & {}

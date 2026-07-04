@@ -34,3 +34,9 @@ export interface SelectedItemState {
   id: ID;
   state: "old" | "new" | "remove";
 }
+
+export enum OrderStatus {
+  PENDING = "pending",
+  PREPARED = "prepared",
+  RECEIVED = "received"
+}

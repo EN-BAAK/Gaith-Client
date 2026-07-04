@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Search, Loader2, Filter as FilterIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useDebouncedSearch } from "@/hooks/useHelpers";
 import Product from "./Product";
 import Filter from "./Filter";
@@ -12,8 +12,14 @@ import { useGetAllProducts } from "@/features/useProducts";
 import Content from "../dashboard/Contetns";
 import { useGetAllBrands } from "@/features/useBrands";
 import Header from "../Header";
+import HeaderNestedElement from "./HeaderNestedElement";
+import { useBasket } from "@/contexts/BasketProvider";
+import { useRouter } from "next/navigation";
 
 const ShopProductsPage: React.FC = () => {
+  const { addToBasket } = useBasket()
+  const router = useRouter()
+
   const [selectedCategory, setSelectedCategory] = useState<ID | undefined>(undefined);
   const [selectedBrand, setSelectedBrand] = useState<ID | undefined>(undefined);
   const { search, setSearch, debouncedSearch } = useDebouncedSearch();
@@ -55,35 +61,18 @@ const ShopProductsPage: React.FC = () => {
 
   return (
     <div className="h-screen bg-background2 w-full h-full mx-auto font-sans text-right overflow-hidden" dir="rtl">
-      <Header />
+      <Header
+        NestedElements={<HeaderNestedElement
+          search={search}
+          setSearch={setSearch}
+          openFilter={() => setIsFilterOpen(true)}
+          hasActiveFilters={hasActiveFilters}
+        />}
+      />
 
-      <div className="w-full mt-17 bg-reversed px-4 py-4 flex items-center border-b-1 border-primary/15">
-        <div className="relative flex-1">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="ابحث عن منتج، ماركة، أو فئة..."
-            className="h-11 w-full md:max-w-[450px] bg-background2 pl-4 pr-10"
-          />
-          <Search className="w-4 h-4 text-text/40 absolute top-3.5 right-3.5" />
-        </div>
-
-        <button
-          onClick={() => setIsFilterOpen(true)}
-          className="block lg:hidden relative p-2.5 hover:bg-background2 rounded-xl transition-colors cursor-pointer text-text/70 hover:text-text"
-          title="افتح القائمة الجانبية للفلاتر"
-        >
-          <FilterIcon className="w-5 h-5" />
-
-          {hasActiveFilters && (
-            <span className="absolute top-2 left-2 w-2.5 h-2.5 bg-danger rounded-full border-2 border-reversed ring-1 ring-danger animate-pulse" />
-          )}
-        </button>
-      </div>
-
-      <div className="lg:p-4 lg:pl-0">
+      <div className="lg:p-4 lg:mt-18 mt-20">
         <div className="flex items-start justify-between lg:gap-4">
-          <div className="flex-1 lg:col-span-3 lg:order-1 space-y-4 h-[calc(100vh-160px)] overflow-y-auto p-2 lg:p-0">
+          <div className="flex-1 lg:col-span-3 lg:order-1 space-y-4 h-[calc(100vh-95px)] overflow-y-auto p-2 lg:p-0">
             <div className="flex items-center justify-between pb-2">
               <p className="brand text-lg text-text font-normal">
                 جميع المنتجات <span className="text-sm font-sans text-text/50 font-normal">({totalCount})</span>
@@ -101,12 +90,13 @@ const ShopProductsPage: React.FC = () => {
               emptyDesc="لم نجد أي قطع أزياء تطابق تصفيتك الحالية."
               isLoading={isLoading}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                 {products.map((productItem) => (
                   <Product
                     key={`shop-item-${productItem.id}`}
                     product={productItem}
-                    onAddToBasket={(p) => console.log("السلة:", p.title)}
+                    onAddToBasket={(p) => addToBasket(p)}
+                    gotToProduct={() => router.push(`/shop/${productItem.id}`)}
                   />
                 ))}
               </div>

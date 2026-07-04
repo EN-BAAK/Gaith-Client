@@ -1,3 +1,4 @@
+import BasketProvider from "@/contexts/BasketProvider";
 import { CommonParentProps } from "@/types/global";
 import type { Metadata } from "next";
 
@@ -69,7 +70,11 @@ export const metadata: Metadata = {
 };
 
 const ShopLayout: React.FC<CommonParentProps> = ({ children }) => {
-  return children;
+  return (
+    <BasketProvider>
+      {children}
+    </BasketProvider>
+  );
 };
 
 export default ShopLayout;

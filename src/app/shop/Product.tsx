@@ -1,16 +1,17 @@
 "use client";
 
 import React from "react";
-import { Award, Shirt, ShoppingCart } from "lucide-react";
+import { Award, Eye, Shirt, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/helpers";
 import CustomButton from "@/libraries/forms/components/Button";
 import { ShopProductProps } from "@/types/components";
 
-const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket }) => {
+const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket, gotToProduct }) => {
   return (
-    <div className="bg-card border border-background2 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 group animate-fade-in">
-      <div className="relative w-full h-72 bg-primary/30 flex items-center justify-center overflow-hidden border-b border-accent/40">
+    <div
+      className="bg-card border border-background2 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 group animate-fade-in">
+      <div className="relative w-full h-50 bg-primary/30 flex items-center justify-center overflow-hidden border-b border-accent/40">
         {product.imgUrl ? (
           <Image
             unoptimized
@@ -94,7 +95,14 @@ const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket }) => {
             icon={ShoppingCart}
             label="اضف للسلة"
             onClick={() => onAddToBasket?.(product)}
-            className="w-fit"
+            className="w-fit rounded-sm"
+          />
+
+          <CustomButton
+            icon={Eye}
+            variant="info-outline"
+            onClick={gotToProduct}
+            className="w-fit rounded-sm"
           />
 
           <div className="ms-auto">
