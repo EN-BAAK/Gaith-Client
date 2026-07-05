@@ -647,3 +647,12 @@ export const updateOrder = async ({ id, data }: UpdateItemType<OrderEntity>): Pr
   if (!response.ok) throw new Error(responseBody.message || "Failed to update order");
   return responseBody;
 };
+
+export const getDashboard = async () => {
+  const response = await fetch(`${API_URL}/dashboard`, {
+    credentials: "include",
+  });
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to fetch dashboard data");
+  return responseBody;
+};

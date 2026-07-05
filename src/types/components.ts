@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import { CommonParentProps, ID } from "./global";
 import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, OrderEntity, OrderItemEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
 
@@ -178,4 +179,38 @@ export type DashboardOrderItemRowProps = {
 export type DashboardOrderItemsProps = {
   orderId: ID;
   closeOrder: () => void
+}
+
+export type DashboardStateCardProps = {
+  label: string;
+  value: string | number;
+  change?: string | number;
+  Icon: LucideIcon;
+  color: string;
+}
+
+export interface DashboardStatesProps {
+  cardsData: {
+    totalUsers: number;
+    wholesaleUsers: number;
+    totalProducts: number;
+    activeOrdersCount: number;
+    revenue: {
+      currentMonth: number;
+      previousMonth: number;
+    };
+  };
+}
+
+interface ChartDataPoint {
+  date: string;
+  orders: number;
+  revenue: number;
+}
+
+export type DashboardPlotProps = {
+  chartsData: {
+    currentMonth: ChartDataPoint[];
+    previousMonth: ChartDataPoint[];
+  };
 }
