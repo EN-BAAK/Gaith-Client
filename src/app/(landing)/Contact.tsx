@@ -83,7 +83,7 @@ const Contact: React.FC = () => {
 
                   <TextAreaField
                     required
-                    rows={4}
+                    dir='rtl'
                     name="message"
                     label="الرسالة"
                     placeholder="أكتب رسالتك هنا..."

@@ -5,6 +5,7 @@ import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { BsWhatsapp } from 'react-icons/bs'
+import Link from 'next/link'
 
 const Footer: React.FC = () => {
   const router = useRouter()
@@ -115,18 +116,18 @@ const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
           <span>جميع الحقوق محفوظة © ٢٠٢٦ EN-BAAK</span>
           <div className="flex gap-5">
-            <a
-              href="#"
+            <Link
+              href="/privacy-policy"
               className="hover:text-white/70 transition-colors"
             >
               سياسة الخصوصية
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/terms-and-conditions"
               className="hover:text-white/70 transition-colors"
             >
               الشروط والأحكام
-            </a>
+            </Link>
           </div>
         </div>
       </div>
