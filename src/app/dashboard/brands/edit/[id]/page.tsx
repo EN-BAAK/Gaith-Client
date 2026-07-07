@@ -90,7 +90,7 @@ const EditBrandForm: React.FC = () => {
         {({ dirty, isSubmitting, isValid }) => (
           <Form className="space-y-8 text-right">
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تحديث الماركة</h2>
@@ -107,7 +107,7 @@ const EditBrandForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3 mb-4">
                 <ImageIcon className="size-5 text-accent" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تعديل الشعار</h2>

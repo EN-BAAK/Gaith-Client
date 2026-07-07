@@ -67,14 +67,13 @@ const EditCategoryForm: React.FC = () => {
       >
         {({ dirty, isSubmitting, isValid }) => (
           <Form className="space-y-8 text-right">
-
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <Grid className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تحديث الفئة</h2>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 items-end">
+              <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 items-start">
                 <InputField
                   name="name"
                   type="text"

@@ -193,20 +193,18 @@ const Contact: React.FC = () => {
               </div>
             )}
 
-            {/* زر الواتساب الديناميكي */}
             {systemSettings?.whatsappLink && (
               <a
                 href={systemSettings.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white py-4 rounded-xl font-semibold hover:bg-[#20BD5A] transition-colors shadow-lg shadow-[#25D366]/20"
+                className="flex items-center justify-center gap-2.5 bg-[#25D366] text-reversed py-4 rounded-xl font-semibold hover:bg-[#20BD5A] transition-colors shadow-lg shadow-[#25D366]/20"
               >
                 <BsWhatsapp size={20} />
                 تواصل عبر واتساب الآن
               </a>
             )}
 
-            {/* أزرار مواقع التواصل الاجتماعي المتوفرة */}
             {socialLinks.length > 0 && (
               <div className="flex gap-3 justify-start flex-wrap">
                 {socialLinks.map(({ Icon, href }, i) => (

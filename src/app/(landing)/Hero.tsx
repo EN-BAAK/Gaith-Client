@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
             <span className="block text-accent">الأناقة</span>
             بالأصالة
           </h1>
-          <p className="text-reversed/65 text-lg leading-relaxed mb-10 max-w-lg">
+          <p className="text-muted text-lg leading-relaxed mb-10 max-w-lg">
             اكتشف أرقى التصاميم العربية والعالمية. نوفر لك
             أجود الأقمشة وأحدث صيحات الموضة بأسعار الجملة
             والمفرد.
@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
             
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-reversed/30 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted animate-bounce">
         <ChevronDown size={22} />
       </div>
     </section>

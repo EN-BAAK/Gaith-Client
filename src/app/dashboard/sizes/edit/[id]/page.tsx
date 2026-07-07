@@ -47,7 +47,6 @@ const EditSizeForm: React.FC = () => {
 
   return (
     <div>
-      {/* الهيدر */}
       <div className="mb-8 flex items-center gap-3 text-right">
         <div className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <Ruler className="size-6" />
@@ -66,9 +65,7 @@ const EditSizeForm: React.FC = () => {
       >
         {({ dirty, isSubmitting, isValid }) => (
           <Form className="space-y-8 text-right">
-
-            {/* تفاصيل المقاس */}
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <CheckSquare className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تحديث المقاس</h2>

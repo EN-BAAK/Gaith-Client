@@ -51,7 +51,7 @@ const AuthLayout: React.FC<Readonly<CommonParentProps>> = ({ children }) => {
                 <div className="w-5 h-5 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center shrink-0">
                   <Check size={11} className="text-accent" />
                 </div>
-                <span className="text-reversed/70 text-sm">{feature}</span>
+                <span className="text-muted text-sm">{feature}</span>
               </div>
             ))}
           </div>

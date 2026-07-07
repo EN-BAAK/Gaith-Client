@@ -128,6 +128,7 @@ const SelectImageField: React.FC<
             border-dashed
             border-gray-300
             p-4
+            bg-reversed
             transition
             duration-300
             hover:border-main
@@ -165,6 +166,7 @@ const SelectImageField: React.FC<
             className="
             relative
             h-32
+            bg-reversed
             w-full
           "
           >

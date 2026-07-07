@@ -22,7 +22,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     <React.Fragment>
-      {/* Mobile Overlay backdrop */}
       {isOpen && (
         <div
           onClick={closeSidebar}
@@ -69,7 +68,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             </div>
           </div>
 
-          {/* Navigation Links */}
           <nav className="relative z-10 flex-1 p-4 space-y-1 overflow-y-auto">
             {navItems.map((item) => {
               const Icon = item.icon;

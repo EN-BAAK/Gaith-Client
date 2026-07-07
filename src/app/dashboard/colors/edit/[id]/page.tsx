@@ -68,7 +68,7 @@ const EditColorForm: React.FC = () => {
           <Form className="space-y-8 text-right">
 
             {/* تفاصيل اللون */}
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <Paintbrush className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">بيانات اللون الأساسية</h2>

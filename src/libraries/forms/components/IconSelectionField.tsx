@@ -47,7 +47,7 @@ const IconSelectionField: React.FC<IconSelectionFieldProps> = ({
 
             <div
               className={cn(
-                "border rounded-lg p-4 h-50 overflow-hidden",
+                "border rounded-lg p-4 h-50 overflow-hidden bg-reversed",
                 hasError
                   ? "border-danger"
                   : "border-muted",

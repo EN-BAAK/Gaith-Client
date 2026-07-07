@@ -83,7 +83,7 @@ const CreateProductForm: React.FC = () => {
         {({ dirty, isSubmitting, isValid }) => (
           <Form className="space-y-8 text-right">
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex gap-3 items-center">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Info className="size-5" />
@@ -100,7 +100,7 @@ const CreateProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex gap-3 items-center">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <DollarSign className="size-5" />
@@ -116,7 +116,7 @@ const CreateProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex gap-3 items-center">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Layers className="size-5" />
@@ -140,7 +140,7 @@ const CreateProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex gap-3 items-center mb-2">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <ImageIcon className="size-5" />

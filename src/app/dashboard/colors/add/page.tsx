@@ -44,7 +44,7 @@ const CreateColorForm: React.FC = () => {
           <Form className="space-y-8 text-right">
 
             {/* قسم البيانات الأساسية */}
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex gap-3 items-center">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Paintbrush className="size-5" />

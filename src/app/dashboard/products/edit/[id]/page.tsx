@@ -109,8 +109,7 @@ const EditProductForm: React.FC = () => {
       <Formik enableReinitialize initialValues={initialFormValues!} validationSchema={validationProductModifySchema} onSubmit={onSubmit}>
         {({ dirty, isSubmitting, isValid }) => (
           <Form className="space-y-8 text-right">
-
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <Info className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تفاصيل المسميات والوصف</h2>
@@ -122,7 +121,7 @@ const EditProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <DollarSign className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">الأسعار الحالية</h2>
@@ -133,7 +132,7 @@ const EditProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="space-y-5 rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="space-y-5 rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3">
                 <Layers className="size-5 text-primary" />
                 <h2 className="font-rubik text-lg font-semibold text-text">العلاقات والخامات المتعددة</h2>
@@ -152,7 +151,7 @@ const EditProductForm: React.FC = () => {
               </div>
             </section>
 
-            <section className="rounded-2xl border border-border bg-background p-5 md:p-6">
+            <section className="rounded-2xl border border-border bg-background2 p-5 md:p-6">
               <div className="flex items-center gap-3 mb-4">
                 <ImageIcon className="size-5 text-accent" />
                 <h2 className="font-rubik text-lg font-semibold text-text">تعديل الصورة التوضيحية</h2>
