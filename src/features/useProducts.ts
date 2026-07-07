@@ -33,7 +33,7 @@ const clearFilteredProductsCache = (queryClient: QueryClient) => {
 
 export const useGetAllProducts = (limit: number, search?: string, categoryId?: ID, brandId?: ID) => {
   return useInfiniteQuery({
-    queryKey: [userBaseKey, { search, categoryId, brandId }],
+    queryKey: [userBaseKey, limit, { search, categoryId, brandId }],
     queryFn: ({ pageParam = 1 }) =>
       getAllProducts({ limit, page: pageParam, search, categoryId, brandId }),
     initialPageParam: 1,

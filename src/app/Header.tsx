@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ NestedElements }) => {
   return (
     <React.Fragment>
       <header
-        className={`w-full transition-all bg-reversed duration-300 z-40 py-4 text-right m-0 shadow-md
+        className={`w-full transition-all bg-reversed duration-300 z-40 py-3 text-right m-0 shadow-md
           fixed top-0 left-0 right-0 backdrop-blur-md border-b border-background2/80 animate-fade-in
           `}
         dir="rtl"

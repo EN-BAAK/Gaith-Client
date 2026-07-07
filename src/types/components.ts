@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { CommonParentProps, ID } from "./global";
-import { BranchEntity, BrandEntity, CategoryEntity, ColorEntity, OrderEntity, OrderItemEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
+import { BranchEntity, BranchEntityGlobal, BrandEntity, CategoryEntity, ColorEntity, OrderEntity, OrderItemEntity, ProductEntity, ProductEntityGlobal, SiteEntity, SizeEntity, User } from "./models";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "text" | "rectangular" | "circular" | "pattern"
@@ -137,6 +137,12 @@ export interface ShopProductProps {
   gotToProduct?: () => void
 }
 
+export interface LandingProductProps {
+  product: ProductEntityGlobal;
+  goToShop?: () => void;
+  gotToProduct?: () => void
+}
+
 export interface ShopBrandListProps {
   brands: BrandEntity[];
   selectedBrand: ID | undefined;
@@ -214,3 +220,12 @@ export type DashboardPlotProps = {
     previousMonth: ChartDataPoint[];
   };
 }
+
+export type GroupedBranchSite = {
+  site: string,
+  branches: BranchEntityGlobal[],
+}
+
+export type LandingBranchProps = {
+  group: GroupedBranchSite
+};

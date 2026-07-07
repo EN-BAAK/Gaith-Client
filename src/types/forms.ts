@@ -48,3 +48,10 @@ export interface AdminOrderQueryParams {
   limit: number,
   page: number
 }
+
+export interface ContactInput {
+  fullName: string;
+  phone: string;
+  email?: string;
+  message: string;
+}

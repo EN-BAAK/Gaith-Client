@@ -1,4 +1,4 @@
-import { ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, VerifyAccountProps } from "@/types/forms";
+import { ContactInput, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, VerifyAccountProps } from "@/types/forms";
 import { BranchEntityCreation, BrandEntityCreation, CategoryEntityCreation, ColorEntityCreation, ProductEntityCreation, SiteEntityCreation, SizeEntityCreation } from "@/types/models";
 
 export const loginInItalValues: LoginProps = {
@@ -67,4 +67,11 @@ export const initialProductCreationValues: ProductEntityCreation = {
   brandId: "",
   colors: [],
   sizes: [],
+};
+
+export const initialContactValues: ContactInput = {
+  fullName: "",
+  phone: "",
+  email: "",
+  message: "",
 };

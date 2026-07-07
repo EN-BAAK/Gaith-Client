@@ -2,7 +2,7 @@ import { setSessionItem } from "@/lib/helpers";
 import { CachedUser, ID } from "@/types/global";
 import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal, ProductEntityGlobal, ProductEntity, OrderEntity, OrderItemEntityCreation } from "./types/models";
 import { APIResponse, UpdateItemType, UpdateItemWithFormData } from "./libraries/react-query/types";
-import { AdminOrderQueryParams, AdminProductsQueryParams, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
+import { AdminOrderQueryParams, AdminProductsQueryParams, ContactInput, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const API_URL = `${BASE_URL}/${process.env.NEXT_PUBLIC_API_VERSION}`
@@ -654,5 +654,17 @@ export const getDashboard = async () => {
   });
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message || "Failed to fetch dashboard data");
+  return responseBody;
+};
+
+export const sendContactMessage = async (data: ContactInput): Promise<APIResponse<null>> => {
+  const response = await fetch(`${API_URL}/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  const responseBody = await response.json();
+  if (!response.ok) throw new Error(responseBody.message || "Failed to send message");
   return responseBody;
 };

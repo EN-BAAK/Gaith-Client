@@ -130,3 +130,18 @@ export const validationProductModifySchema = Yup.object({
     })
   ),
 });
+
+export const validationContactSchema = Yup.object({
+  fullName: Yup.string()
+    .min(3, "الاسم الكامل يجب أن لا يقل عن 3 أحرف")
+    .max(60, "الاسم طويل جداً")
+    .required("يرجى إدخال الاسم الكامل"),
+  phone: Yup.string()
+    .required("يرجى إدخال رقم الهاتف"),
+  email: Yup.string()
+    .email("صيغة البريد الإلكتروني غير صحيحة")
+    .optional(),
+  message: Yup.string()
+    .min(10, "الرسالة يجب أن لا تقل عن 10 أحرف")
+    .required("يرجى كتابة نص الرسالة"),
+});

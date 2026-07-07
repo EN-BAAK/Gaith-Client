@@ -5,9 +5,9 @@ import { Award, Eye, Shirt, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/helpers";
 import CustomButton from "@/libraries/forms/components/Button";
-import { ShopProductProps } from "@/types/components";
+import { LandingProductProps } from "@/types/components";
 
-const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket, gotToProduct }) => {
+const Product: React.FC<LandingProductProps> = ({ product, goToShop, gotToProduct }) => {
   return (
     <div
       className="bg-card border border-background2 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 group animate-fade-in">
@@ -54,7 +54,6 @@ const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket, gotToProd
             )}
             <span className="text-brand">{product.brand?.name || "بدون علامة"}</span>
           </div>
-
           <p className="text-xs text-muted font-sans line-clamp-2 mt-0.5 leading-relaxed">
             {product.summarize}
           </p>
@@ -92,8 +91,8 @@ const Product: React.FC<ShopProductProps> = ({ product, onAddToBasket, gotToProd
         <div className="pt-2 mt-1 flex items-center gap-2">
           <CustomButton
             icon={ShoppingCart}
-            label="اضف للسلة"
-            onClick={() => onAddToBasket?.(product)}
+            label="تسوق"
+            onClick={() => goToShop?.()}
             className="w-fit rounded-sm"
           />
 
