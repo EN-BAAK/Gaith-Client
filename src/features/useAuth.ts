@@ -1,4 +1,4 @@
-import { forgotPassword, login, logout, resendVerificationCode, resetForgottenPassword, signup, validateAuthentication, verifyAccount } from "@/api-client";
+import { changePassword, forgotPassword, login, logout, resendVerificationCode, resetForgottenPassword, signup, validateAuthentication, verifyAccount } from "@/api-client";
 import { useAppContext } from "@/libraries/project-provider/AppProvider";
 import { SignupProps } from "@/types/forms";
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query"
@@ -158,3 +158,23 @@ export const useLogout = () => {
     onError,
   });
 };
+
+export const useChangePassword = () => {
+  const { pushToast } = useAppContext();
+  const router = useRouter()
+
+  const onSuccess = () => {
+    pushToast({ message: "تم تغيير كلمة المرور بنجاح", type: "SUCCESS" });
+    router.replace("/dashboard")
+  };
+
+  const onError = () => {
+    pushToast({ message: "فشل تغيير كلمة المرور, حاول مرة اخرى", type: "ERROR" });
+  };
+
+  return useMutation({
+    mutationFn: changePassword,
+    onSuccess,
+    onError
+  })
+}

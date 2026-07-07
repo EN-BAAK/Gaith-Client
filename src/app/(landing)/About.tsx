@@ -1,6 +1,7 @@
 "use client"
 
 import ArabicPattern from '@/components/ArabicPattern'
+import { useGetSystemSettings } from '@/features/useSettings'
 import Image from 'next/image'
 import React from 'react'
 
@@ -24,7 +25,8 @@ const states = [
 ]
 
 const About: React.FC = () => {
-
+  const { data } = useGetSystemSettings()
+  const subtitle = data?.data.aboutSubtitle || ""
 
   return (
     <section className="py-24 bg-background relative overflow-hidden">
@@ -47,22 +49,18 @@ const About: React.FC = () => {
                   "'IBM Plex Sans Arabic', sans-serif",
               }}
             >
-              قصة عشق مع الأزياء
+              قصة عشق مع الأقمشة
               <span className="block text-accent">
                 منذ ١٢ عاماً
               </span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-5">
-              دار الفاخرة هي أكثر من مجرد متجر أزياء — إنها
-              وجهة لكل من يؤمن بأن الأناقة هي فن يعكس هويتنا
-              وحضارتنا. تأسسنا عام ٢٠١٢ في دمشق، وانطلقنا من
-              رؤية بسيطة: توفير أرقى الأزياء العربية بجودة
-              عالمية وأسعار منافسة.
+              {subtitle}
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
               نعمل مع نخبة من أمهر المصممين والحرفيين، ونستورد
               أجود الأقمشة من إيطاليا وفرنسا والإمارات. نحن
-              نؤمن أن كل امرأة تستحق الشعور بالأناقة والثقة.
+              نؤمن أن كل بيت يستجق ان يحصل على الأناقة.
             </p>
 
             <div className="grid grid-cols-2 gap-4">

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Form, Formik, FormikHelpers } from "formik";
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Send, User } from 'lucide-react';
-import { BsWhatsapp } from 'react-icons/bs';
+import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Send, User, Youtube, Linkedin, Twitter } from 'lucide-react';
+import { BsWhatsapp, BsTiktok } from 'react-icons/bs';
 import ArabicPattern from '@/components/ArabicPattern';
 import CustomButton from '@/libraries/forms/components/Button';
 import InputField from "@/libraries/forms/components/InputField";
@@ -12,14 +12,58 @@ import { useSendContactMessage } from "@/features/useContact";
 import { initialContactValues } from "@/constants/formsValues";
 import { validationContactSchema } from "@/constants/formsValidations";
 import { ContactInput } from '@/types/forms';
+import { useGetSystemSettings } from '@/features/useSettings';
 
 const Contact: React.FC = () => {
   const { mutateAsync } = useSendContactMessage();
+  const { data } = useGetSystemSettings();
+  const systemSettings = data?.data;
 
   const onSubmit = async (values: ContactInput, helpers: FormikHelpers<ContactInput>) => {
     await mutateAsync(values);
     helpers.resetForm();
   };
+
+  const contactInfo = [
+    ...(systemSettings?.phone ? [{
+      Icon: Phone,
+      label: "اتصل بنا",
+      value: systemSettings.phone,
+      color: "#2E7D5B",
+      dir: "ltr" as const
+    }] : []),
+    ...(systemSettings?.whatsapp ? [{
+      Icon: MessageCircle,
+      label: "واتساب",
+      value: systemSettings.whatsapp,
+      color: "#25D366",
+      dir: "ltr" as const
+    }] : []),
+    ...(systemSettings?.supportEmail ? [{
+      Icon: Mail,
+      label: "البريد الإلكتروني",
+      value: systemSettings.supportEmail,
+      color: "#B08D57",
+      dir: "ltr" as const
+    }] : []),
+    ...(systemSettings?.location ? [{
+      Icon: MapPin,
+      label: "العنوان",
+      value: systemSettings.location,
+      color: "#B42318",
+      dir: "rtl" as const
+    }] : []),
+  ];
+
+  const socialLinks = [
+    ...(systemSettings?.facebook ? [{ Icon: Facebook, href: systemSettings.facebook }] : []),
+    ...(systemSettings?.instagram ? [{ Icon: Instagram, href: systemSettings.instagram }] : []),
+    ...(systemSettings?.whatsappLink ? [{ Icon: BsWhatsapp, href: systemSettings.whatsappLink }] : []),
+    ...(systemSettings?.youtube ? [{ Icon: Youtube, href: systemSettings.youtube }] : []),
+    ...(systemSettings?.linkedIn ? [{ Icon: Linkedin, href: systemSettings.linkedIn }] : []),
+    ...(systemSettings?.twitter ? [{ Icon: Twitter, href: systemSettings.twitter }] : []),
+    ...(systemSettings?.tiktok ? [{ Icon: BsTiktok, href: systemSettings.tiktok }] : []),
+  ];
 
   return (
     <section className="py-24 bg-background2 relative overflow-hidden">
@@ -31,6 +75,7 @@ const Contact: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
+          {/* نموذج إرسال الرسالة */}
           <div className="bg-card h-fit border border-border/50 rounded-2xl p-8 shadow-sm">
             <div className="text-accent text-sm font-medium mb-2 tracking-widest text-right">
               تواصل معنا
@@ -100,6 +145,7 @@ const Contact: React.FC = () => {
             </Formik>
           </div>
 
+          {/* قسم معلومات التواصل الجانبي */}
           <div className="flex flex-col justify-center gap-8 text-right">
             <div>
               <div className="text-accent text-sm font-medium mb-2 tracking-widest">
@@ -113,81 +159,69 @@ const Contact: React.FC = () => {
               >
                 نحن هنا لمساعدتك
               </h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                فريقنا متاح من السبت إلى الخميس من الساعة ٩
-                صباحاً حتى ٧ مساءً. لا تتردد في التواصل معنا
-                بأي طريقة تفضلها.
-              </p>
+              {systemSettings?.contactSubtitle && (
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {systemSettings.contactSubtitle}
+                </p>
+              )}
             </div>
 
-            <div className="space-y-4">
-              {[
-                {
-                  Icon: Phone,
-                  label: "اتصل بنا",
-                  value: "+963 *** *** ***",
-                  color: "#2E7D5B",
-                },
-                {
-                  Icon: MessageCircle,
-                  label: "واتساب",
-                  value: "+963 *** *** ***",
-                  color: "#25D366",
-                },
-                {
-                  Icon: Mail,
-                  label: "البريد الإلكتروني",
-                  value: "info@al-gaith.com",
-                  color: "#B08D57",
-                },
-                {
-                  Icon: MapPin,
-                  label: "العنوان",
-                  value: "دمشق، شارع الشعلان، بجانب مجمع أبو رمانة",
-                  color: "#B42318",
-                },
-              ].map(({ Icon, label, value, color }) => (
-                <div
-                  key={label}
-                  className="flex items-start gap-4 bg-card border border-border/50 rounded-xl p-4"
-                >
+            {/* قائمة معلومات التواصل (الديناميكية) */}
+            {contactInfo.length > 0 && (
+              <div className="space-y-4">
+                {contactInfo.map(({ Icon, label, value, color, dir }) => (
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${color}15` }}
+                    key={label}
+                    className="flex items-start gap-4 bg-card border border-border/50 rounded-xl p-4"
                   >
-                    <Icon size={18} style={{ color }} />
-                  </div>
-                  <div>
-                    <div className="text-xs text-muted-foreground mb-0.5">
-                      {label}
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${color}15` }}
+                    >
+                      <Icon size={18} style={{ color }} />
                     </div>
-                    <div dir={label === "العنوان" ? "rtl" : "ltr"} className="text-sm font-medium text-foreground">
-                      {value}
+                    <div>
+                      <div className="text-xs text-muted-foreground mb-0.5">
+                        {label}
+                      </div>
+                      <div dir={dir} className="text-sm font-medium text-foreground">
+                        {value}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white py-4 rounded-xl font-semibold hover:bg-[#20BD5A] transition-colors shadow-lg shadow-[#25D366]/20"
-            >
-              <BsWhatsapp size={20} />
-              تواصل عبر واتساب الآن
-            </a>
+            {/* زر الواتساب الديناميكي */}
+            {systemSettings?.whatsappLink && (
+              <a
+                href={systemSettings.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white py-4 rounded-xl font-semibold hover:bg-[#20BD5A] transition-colors shadow-lg shadow-[#25D366]/20"
+              >
+                <BsWhatsapp size={20} />
+                تواصل عبر واتساب الآن
+              </a>
+            )}
 
-            <div className="flex gap-3 justify-start">
-              {[Facebook, Instagram, BsWhatsapp].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 bg-card border border-border/60 hover:border-accent hover:text-accent rounded-full flex items-center justify-center transition-colors text-muted-foreground"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
+            {/* أزرار مواقع التواصل الاجتماعي المتوفرة */}
+            {socialLinks.length > 0 && (
+              <div className="flex gap-3 justify-start flex-wrap">
+                {socialLinks.map(({ Icon, href }, i) => (
+                  <a
+                    key={i}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-card border border-border/60 hover:border-accent hover:text-accent rounded-full flex items-center justify-center transition-colors text-muted-foreground"
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
         </div>

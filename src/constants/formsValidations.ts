@@ -145,3 +145,40 @@ export const validationContactSchema = Yup.object({
     .min(10, "الرسالة يجب أن لا تقل عن 10 أحرف")
     .required("يرجى كتابة نص الرسالة"),
 });
+
+export const validationPasswordSchema = Yup.object({
+  password: Yup.string()
+    .required("يرجى إدخال كلمة المرور الحالية"),
+  newPassword: Yup.string()
+    .min(8, "كلمة المرور الجديدة يجب أن لا تقل عن 8 أحرف")
+    .matches(/[A-Z]/, "يجب أن تحتوي على حرف كبير واحد على الأقل")
+    .matches(/[a-z]/, "يجب أن تحتوي على حرف صغير واحد على الأقل")
+    .matches(/[0-9]/, "يجب أن تحتوي على رقم واحد على الأقل")
+    .required("يرجى إدخال كلمة المرور الجديدة"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "كلمتا المرور غير متطابقتين")
+    .required("يرجى تأكيد كلمة المرور الجديدة"),
+});
+
+export const validationSystemSettingsSchema = Yup.object({
+  supportEmail: Yup.string()
+    .email("صيغة البريد الإلكتروني غير صحيحة")
+    .required("يرجى إدخال البريد الإلكتروني للدعم"),
+  phone: Yup.string()
+    .required("يرجى إدخال رقم الهاتف"),
+  whatsapp: Yup.string()
+    .required("يرجى إدخال رقم الواتساب"),
+  location: Yup.string()
+    .required("يرجى إدخال الموقع الجغرافي"),
+  aboutSubtitle: Yup.string()
+    .required("يرجى إدخال الوصف الفرعي لصفحة عن الشركة"),
+  contactSubtitle: Yup.string()
+    .required("يرجى إدخال الوصف الفرعي لصفحة اتصل بنا"),
+  youtube: Yup.string().url("رابط غير صالح").optional(),
+  instagram: Yup.string().url("رابط غير صالح").optional(),
+  facebook: Yup.string().url("رابط غير صالح").optional(),
+  linkedIn: Yup.string().url("رابط غير صالح").optional(),
+  twitter: Yup.string().url("رابط غير صالح").optional(),
+  tiktok: Yup.string().url("رابط غير صالح").optional(),
+  whatsappLink: Yup.string().url("رابط غير صالح").optional(),
+});

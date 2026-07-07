@@ -1,4 +1,4 @@
-import { ContactInput, ForgotPasswordProps, LoginProps, ResetPasswordProps, SignupProps, VerifyAccountProps } from "@/types/forms";
+import { ContactInput, ForgotPasswordProps, LoginProps, ResetForgottenPasswordProps, ResetPasswordProps, SignupProps, VerifyAccountProps } from "@/types/forms";
 import { BranchEntityCreation, BrandEntityCreation, CategoryEntityCreation, ColorEntityCreation, ProductEntityCreation, SiteEntityCreation, SizeEntityCreation } from "@/types/models";
 
 export const loginInItalValues: LoginProps = {
@@ -21,7 +21,7 @@ export const forgotPasswordInitialValues: ForgotPasswordProps = {
   email: "",
 };
 
-export const resetPasswordInitialValues: ResetPasswordProps = {
+export const resetPasswordInitialValues: ResetForgottenPasswordProps = {
   otp: "",
   password: "",
 };
@@ -74,4 +74,10 @@ export const initialContactValues: ContactInput = {
   phone: "",
   email: "",
   message: "",
+};
+
+export const initialPasswordValues: ResetPasswordProps = {
+  password: "",
+  newPassword: "",
+  confirmPassword: "",
 };

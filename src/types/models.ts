@@ -121,3 +121,19 @@ export interface OrderItemEntity {
 }
 
 export type OrderItemEntityCreation = Omit<OrderItemEntity, "id"> & {}
+
+export interface SystemSettingsEntity {
+  supportEmail: string;
+  phone: string;
+  whatsapp: string;
+  youtube: string;
+  instagram: string;
+  facebook: string;
+  linkedIn: string;
+  twitter: string;
+  tiktok: string;
+  location: string;
+  aboutSubtitle: string;
+  contactSubtitle: string,
+  whatsappLink: string,
+}

@@ -6,7 +6,7 @@ import { Formik, Form, FormikHelpers } from "formik"
 import { Mail, Lock, ArrowRight } from "lucide-react"
 import InputField from "@/libraries/forms/components/InputField"
 import SubmitButton from "@/libraries/forms/components/SubmitButton"
-import { ForgotPasswordProps, ResetPasswordProps } from "@/types/forms"
+import { ForgotPasswordProps, ResetForgottenPasswordProps } from "@/types/forms"
 import { forgotPasswordInitialValues, resetPasswordInitialValues } from "@/constants/formsValues"
 import { forgotPasswordValidationSchema, resetPasswordValidationSchema } from "@/constants/formsValidations"
 import OtpInput from "@/libraries/forms/components/OtpField"
@@ -27,7 +27,7 @@ const ForgotPasswordPage: React.FC = () => {
     formik.setSubmitting(false)
   }
 
-  const onResetSubmit = async (values: ResetPasswordProps, formik: FormikHelpers<ResetPasswordProps>) => {
+  const onResetSubmit = async (values: ResetForgottenPasswordProps, formik: FormikHelpers<ResetForgottenPasswordProps>) => {
     await resetPassword({
       otp: values.otp,
       password: values.password,

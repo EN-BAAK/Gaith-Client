@@ -24,7 +24,7 @@ export type ForgotPasswordProps = {
   email: string
 }
 
-export type ResetPasswordProps = {
+export type ResetForgottenPasswordProps = {
   otp: string,
   password: string
 }
@@ -54,4 +54,10 @@ export interface ContactInput {
   phone: string;
   email?: string;
   message: string;
+}
+
+export type ResetPasswordProps = {
+  password: string,
+  newPassword: string,
+  confirmPassword: string
 }

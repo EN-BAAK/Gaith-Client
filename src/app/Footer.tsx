@@ -1,18 +1,32 @@
 "use client"
 
 import ArabicPattern from '@/components/ArabicPattern'
-import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
+import { Facebook, Instagram, Mail, MapPin, Phone, Youtube, Linkedin, Twitter } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { BsWhatsapp } from 'react-icons/bs'
+import { BsWhatsapp, BsTiktok } from 'react-icons/bs'
 import Link from 'next/link'
+import { useGetSystemSettings } from '@/features/useSettings'
 
 const Footer: React.FC = () => {
   const router = useRouter()
   const goTo = (r: string) => router.push(r)
 
+  const { data } = useGetSystemSettings()
+  const systemSettings = data?.data
+
+  const socialLinks = [
+    ...(systemSettings?.facebook ? [{ Icon: Facebook, href: systemSettings.facebook }] : []),
+    ...(systemSettings?.instagram ? [{ Icon: Instagram, href: systemSettings.instagram }] : []),
+    ...(systemSettings?.whatsappLink ? [{ Icon: BsWhatsapp, href: systemSettings.whatsappLink }] : []),
+    ...(systemSettings?.youtube ? [{ Icon: Youtube, href: systemSettings.youtube }] : []),
+    ...(systemSettings?.linkedIn ? [{ Icon: Linkedin, href: systemSettings.linkedIn }] : []),
+    ...(systemSettings?.twitter ? [{ Icon: Twitter, href: systemSettings.twitter }] : []),
+    ...(systemSettings?.tiktok ? [{ Icon: BsTiktok, href: systemSettings.tiktok }] : []),
+  ];
+
   return (
-    <footer className="bg-primary text-white/80 relative overflow-hidden">
+    <footer className="bg-primary text-muted relative overflow-hidden">
       <ArabicPattern
         id="footer-pat"
         color="#B08D57"
@@ -20,51 +34,44 @@ const Footer: React.FC = () => {
       />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
+
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-2.5 mb-4 justify-start">
               <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center">
-                <span
-                  className="text-white font-bold"
-                  style={{
-                    fontFamily: "'Noto Kufi Arabic', serif",
-                  }}
-                >
-                  د
+                <span className="text-primary font-bold brand">
+                  غ
                 </span>
               </div>
               <span
-                className="text-xl font-bold text-white"
-                style={{
-                  fontFamily: "'Noto Kufi Arabic', serif",
-                }}
+                className="text-xl font-bold text-reversed"
               >
-                دار الفاخرة
+                الغيث للمنسوجات
               </span>
             </div>
-            <p className="text-sm leading-relaxed max-w-xs text-white/60">
-              وجهتك الأولى للأزياء الفاخرة والتصاميم الراقية.
-              نوفر أجود الأقمشة العربية والعالمية للجملة والمفرد
-              منذ عام ٢٠١٢.
+
+            <p className="text-sm leading-relaxed max-w-sm text-muted">
+              {systemSettings?.aboutSubtitle || "وجهتك الأولى للأقمشة الفاخرة والتصاميم الراقية. نوفر أجود الأقمشة العربية والعالمية للجملة والمفرد منذ عام ٢٠١٢."}
             </p>
-            <div className="flex gap-3 mt-5">
-              {[Facebook, Instagram, BsWhatsapp].map(
-                (Icon, i) => (
+
+            {socialLinks.length > 0 && (
+              <div className="flex gap-3 mt-5 justify-start">
+                {socialLinks.map(({ Icon, href }, i) => (
                   <a
                     key={i}
-                    href="#"
-                    className="w-9 h-9 bg-white/10 hover:bg-accent transition-colors rounded-full flex items-center justify-center"
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 bg-muted/10 hover:bg-accent hover:text-reversed transition-colors rounded-full flex items-center justify-center"
                   >
                     <Icon size={16} />
                   </a>
-                ),
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">
+          <div className="text-right">
+            <h4 className="text-reversed font-semibold mb-4 text-sm">
               روابط سريعة
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -75,7 +82,7 @@ const Footer: React.FC = () => {
                 <button
                   key={l}
                   onClick={() => goTo(p)}
-                  className="cursor-pointer text-sm text-white/60 hover:text-accent text-right transition-colors"
+                  className="cursor-pointer text-sm text-muted hover:text-accent text-right transition-colors"
                 >
                   {l}
                 </button>
@@ -83,48 +90,49 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">
+          <div className="text-right">
+            <h4 className="text-reversed font-semibold mb-4 text-sm">
               تواصل معنا
             </h4>
-            <div className="flex flex-col gap-3 text-sm text-white/60">
-              <div className="flex items-center gap-2">
-                <Phone
-                  size={14}
-                  className="text-accent shrink-0"
-                />
-                <span dir="ltr">+963 *** *** ***</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail
-                  size={14}
-                  className="text-accent shrink-0"
-                />
-                <span>info@darfakhira.com</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin
-                  size={14}
-                  className="text-accent shrink-0"
-                />
-                <span>دمشق، سوريا</span>
-              </div>
+            <div className="flex flex-col gap-3 text-sm text-muted">
+
+              {systemSettings?.phone && (
+                <div className="flex items-center gap-2 justify-start flex-row-reverse">
+                  <Phone size={14} className="text-accent shrink-0" />
+                  <span dir="ltr">{systemSettings.phone}</span>
+                </div>
+              )}
+
+              {systemSettings?.supportEmail && (
+                <div className="flex items-center gap-2 justify-start flex-row-reverse">
+                  <Mail size={14} className="text-accent shrink-0" />
+                  <span dir="ltr">{systemSettings.supportEmail}</span>
+                </div>
+              )}
+
+              {systemSettings?.location && (
+                <div className="flex items-center gap-2 justify-start flex-row-reverse">
+                  <MapPin size={14} className="text-accent shrink-0" />
+                  <span>{systemSettings.location}</span>
+                </div>
+              )}
+
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+        <div className="border-t border-muted/50 pt-6 flex flex-col sm:flex-row-reverse items-center justify-between gap-4 text-xs text-muted">
           <span>جميع الحقوق محفوظة © ٢٠٢٦ EN-BAAK</span>
           <div className="flex gap-5">
             <Link
               href="/privacy-policy"
-              className="hover:text-white/70 transition-colors"
+              className="transition-colors hover:text-accent duration-200"
             >
               سياسة الخصوصية
             </Link>
             <Link
               href="/terms-and-conditions"
-              className="hover:text-white/70 transition-colors"
+              className="transition-colors hover:text-accent duration-200"
             >
               الشروط والأحكام
             </Link>
