@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Menu, Bell, User } from "lucide-react";
+import { Menu, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useAppContext } from "@/libraries/project-provider/AppProvider";
 import { navItems } from "@/constants/globals";
@@ -45,13 +45,6 @@ const Header: React.FC<DashboardHeaderProps> = ({ setSidebarOpen }) => {
       </div>
 
       <div className="flex items-center gap-3">
-        {/* Notifications */}
-        <button className="relative p-2.5 hover:bg-background2 rounded-full transition-colors text-text">
-          <Bell size={18} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-accent rounded-full" />
-        </button>
-
-        {/* User Card Profile */}
         <div className="flex items-center md:w-[200px] gap-2.5 bg-background2 rounded-xl px-3 py-2 cursor-pointer hover:bg-background2/85 transition-colors">
           <div className="w-7 h-7 bg-accent rounded-full flex items-center justify-center shrink-0">
             <User size={13} className="text-reversed" />

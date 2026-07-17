@@ -2,13 +2,43 @@
 "use client"
 
 import { ShopNestedHeaderElementProps } from '@/types/components'
-import { Filter, Search } from 'lucide-react'
+import { Filter, LogIn, LogOut, Search } from 'lucide-react'
 import React from 'react'
 import ShopCart from './ShopCart'
+import { useLogout } from '@/features/useAuth'
+import { useAppContext } from '@/libraries/project-provider/AppProvider'
+import { useRouter } from 'next/navigation'
 
 const HeaderNestedElement: React.FC<ShopNestedHeaderElementProps> = ({ search, setSearch, hasActiveFilters = false, openFilter }) => {
+  const { isLoggedIn } = useAppContext()
+  const { mutateAsync, isPending } = useLogout()
+  const router = useRouter()
+
+  const goToLogin = () => router.push("/login")
+
+  const logout = async () => {
+    await mutateAsync()
+  }
+
   return (
     <div className='flex items-center md:gap-3'>
+      {isLoggedIn ? <button
+        onClick={logout}
+        title="افتح القائمة الجانبية للفلاتر"
+        className='translation duration-200 hover:text-danger cursor-pointer p-2.5'
+        disabled={isPending}
+      >
+        <LogOut className="w-5 h-5" />
+      </button> :
+        <button
+          onClick={goToLogin}
+          title="افتح القائمة الجانبية للفلاتر"
+          className='translation duration-200 hover:text-success cursor-pointer p-2.5'
+          disabled={isPending}
+        >
+          <LogIn className="w-5 h-5" />
+        </button>}
+
       <ShopCart />
 
       <button

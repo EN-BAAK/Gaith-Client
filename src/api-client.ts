@@ -1,5 +1,5 @@
 import { setSessionItem } from "@/lib/helpers";
-import { CachedUser, ID } from "@/types/global";
+import { CachedUser, ID, ROLE } from "@/types/global";
 import { BranchEntity, BranchEntityCreation, BrandEntity, CategoryEntity, CategoryEntityCreation, ColorEntity, ColorEntityCreation, SiteEntity, SiteEntityCreation, SizeEntity, SizeEntityCreation, User, BranchEntityGlobal, ProductEntityGlobal, ProductEntity, OrderEntity, OrderItemEntityCreation, SystemSettingsEntity } from "./types/models";
 import { APIResponse, UpdateItemType, UpdateItemWithFormData } from "./libraries/react-query/types";
 import { AdminOrderQueryParams, AdminProductsQueryParams, ContactInput, ForgotPasswordProps, LoginProps, ResetForgottenPasswordProps, ResetPasswordProps, SignupProps, UserProductsQueryParams, VerifyAccountAPIProps } from "./types/forms";
@@ -36,7 +36,6 @@ export const validateAuthenticationWithCaching = async (
     const responseBody = await response.json();
 
     if (!response.ok) return null;
-
     cachedUser = { data: responseBody.data, timestamp: now };
 
     return responseBody;
@@ -148,6 +147,7 @@ export const logout = async () => {
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message);
 
+  cachedUser = null
   return responseBody;
 };
 
@@ -157,6 +157,21 @@ export const changePassword = async (data: Omit<ResetPasswordProps, "confirmPass
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
+  });
+
+  const responseBody = await response.json();
+
+  if (!response.ok) throw new Error(responseBody.message);
+
+  return responseBody;
+}
+
+export const changeUserRole = async (data: UpdateItemType<ROLE>) => {
+  const response = await fetch(`${API_URL}/auth/change-role/${data.id}`, {
+    credentials: "include",
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ role: data.data })
   });
 
   const responseBody = await response.json();

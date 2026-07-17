@@ -99,6 +99,8 @@ export interface DashboardBranchSectionProps {
 
 export interface DashboardUsersRowProps {
   user: User;
+  updateUserRole: (user: User) => void,
+  isUpdating: boolean
 }
 
 export interface DashboardProductCardProps {

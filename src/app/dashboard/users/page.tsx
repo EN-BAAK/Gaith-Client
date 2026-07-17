@@ -6,11 +6,21 @@ import { User } from "@/types/models";
 import UserRow from "./User";
 import Loading from "./Loading";
 import Content from "../Contetns";
-import { useGetVerifiedUsersSettings } from "@/features/useUser";
+import { useGetVerifiedUsersSettings, useUpdateUserRole } from "@/features/useUser";
+import { ROLE } from "@/types/global";
 
 const UsersPage: React.FC = () => {
+  const { mutateAsync, isPending } = useUpdateUserRole()
   const { data, isFetching, refetch, isError } = useGetVerifiedUsersSettings();
   const users: User[] = data?.data || [];
+
+  const updateUserRole = async (user: User) => {
+    if (isPending) return;
+    if (user.role === ROLE.RETAIL)
+      await mutateAsync({ id: user.id, data: ROLE.WHOLESALE })
+    if (user.role === ROLE.WHOLESALE)
+      await mutateAsync({ id: user.id, data: ROLE.RETAIL })
+  }
 
   return (
     <div className="space-y-6 animate-fade-in animate-duration-300 w-full h-full">
@@ -53,6 +63,8 @@ const UsersPage: React.FC = () => {
                   <UserRow
                     key={`user-${userItem.id}`}
                     user={userItem}
+                    isUpdating={isPending}
+                    updateUserRole={updateUserRole}
                   />
                 ))}
               </tbody>

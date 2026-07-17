@@ -134,4 +134,24 @@ export const accessGuid: AccessItem[] = [
       },
     ],
   },
+  {
+    path: "/login",
+    authorized: false,
+    roles: []
+  },
+  {
+    path: "/signup",
+    authorized: false,
+    roles: []
+  },
+  {
+    path: "/verify-account",
+    authorized: false,
+    roles: []
+  },
+  {
+    path: "/forgot-password",
+    authorized: false,
+    roles: []
+  }
 ];

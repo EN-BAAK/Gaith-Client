@@ -1,6 +1,9 @@
 import { changePassword, forgotPassword, login, logout, resendVerificationCode, resetForgottenPassword, signup, validateAuthentication, verifyAccount } from "@/api-client";
 import { useAppContext } from "@/libraries/project-provider/AppProvider";
+import { APIResponse } from "@/libraries/react-query/types";
 import { SignupProps } from "@/types/forms";
+import { ROLE } from "@/types/global";
+import { User } from "@/types/models";
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query"
 import { useRouter } from "next/navigation";
 
@@ -18,10 +21,12 @@ export const useLogin = () => {
   const { pushToast } = useAppContext();
   const router = useRouter()
 
-  const onSuccess = () => {
+  const onSuccess = (data: APIResponse<User>) => {
     queryClient.invalidateQueries({ queryKey: ["verify-authentication"], exact: true });
     pushToast({ message: "تم تسجيل الدخول بنجاح", type: "SUCCESS" });
-    router.replace("/dashboard");
+    if (data.data.role === ROLE.ADMIN)
+      router.replace("/dashboard");
+    else router.replace("/shop")
   }
 
   const onError = () => {
