@@ -1,18 +1,10 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient, Query, QueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import {
-  createProductSettings,
-  deleteProductByIdSettings,
-  getAllProducts,
-  getAllProductsSettings,
-  getProductById,
-  getProductByIdSettings,
-  updateProductSettings,
-} from "@/api-client";
+import { createProductSettings, deleteProductByIdSettings, getAllProducts, getAllProductsSettings, getProductById, getProductByIdSettings, updateProductSettings, } from "@/api-client";
 import { useOffsetContext } from "@/libraries/offset/OffsetsProvider";
 import { useAppContext } from "@/libraries/project-provider/AppProvider";
 import { UpdateOffsetUnitProcess } from "@/libraries/offset/types";
-import { APIResponse } from "@/libraries/react-query/types";
+import { APIResponse, InfinityResponse } from "@/libraries/react-query/types";
 import { ProductEntity } from "@/types/models";
 import { ID } from "@/types/global";
 
@@ -84,10 +76,31 @@ export const useCreateProductSettings = () => {
 
   return useMutation({
     mutationFn: createProductSettings,
-    onSuccess: () => {
+    onSuccess: (data: APIResponse<ProductEntity>) => {
+      const newProduct = data.data;
+
       clearFilteredProductsCache(queryClient);
       queryClient.invalidateQueries({ queryKey: [userBaseKey] });
-      queryClient.invalidateQueries({ queryKey: [adminBaseKey] });
+
+      queryClient.setQueriesData<InfinityResponse<ProductEntity>>({ queryKey: [adminBaseKey, ""] }, (oldData) => {
+        if (!oldData) return oldData;
+
+        return {
+          ...oldData,
+          pages: oldData.pages.map((page, index) =>
+            index === 0
+              ? {
+                ...page,
+                data: {
+                  ...page.data,
+                  items: [newProduct, ...page.data.items],
+                },
+              }
+              : page
+          ),
+        };
+      }
+      );
 
       updateOffsetUnit([adminBaseKey, ""], UpdateOffsetUnitProcess.UP);
       pushToast({ message: "تم إضافة المنتج بنجاح", type: "SUCCESS" });
@@ -113,9 +126,27 @@ export const useUpdateProductSettings = () => {
 
       queryClient.setQueryData([adminBaseKey, updatedProduct.id], data);
       queryClient.invalidateQueries({ queryKey: [userBaseKey, updatedProduct.id] });
-
       queryClient.invalidateQueries({ queryKey: [userBaseKey] });
-      queryClient.invalidateQueries({ queryKey: [adminBaseKey] });
+
+      queryClient.setQueriesData<InfinityResponse<ProductEntity>>({ queryKey: [adminBaseKey, ""] }, (oldData) => {
+        if (!oldData) return oldData;
+        console.log("oldData", oldData)
+        return {
+          ...oldData,
+          pages: oldData.pages.map((page) => ({
+            ...page,
+            data: {
+              ...page.data,
+              items: page.data.items.map((product) =>
+                product.id === updatedProduct.id
+                  ? updatedProduct
+                  : product
+              ),
+            },
+          })),
+        };
+      }
+      );
 
       pushToast({ message: "تم تحديث المنتج بنجاح", type: "SUCCESS" });
       router.push(`/dashboard/products`);
@@ -142,7 +173,26 @@ export const useDeleteProductByIdSettings = () => {
       queryClient.removeQueries({ queryKey: [userBaseKey, deletedProduct.id] });
 
       queryClient.invalidateQueries({ queryKey: [userBaseKey] });
-      queryClient.invalidateQueries({ queryKey: [adminBaseKey] });
+
+      queryClient.setQueriesData<InfinityResponse<ProductEntity>>(
+        { queryKey: [adminBaseKey, ""] },
+        (oldData) => {
+          if (!oldData) return oldData;
+
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) => ({
+              ...page,
+              data: {
+                ...page.data,
+                items: page.data.items.filter(
+                  (product) => product.id !== deletedProduct.id
+                ),
+              },
+            })),
+          };
+        }
+      );
 
       updateOffsetUnit([adminBaseKey, ""], UpdateOffsetUnitProcess.DOWN);
       pushToast({ message: "تم حذف المنتج بنجاح", type: "SUCCESS" });

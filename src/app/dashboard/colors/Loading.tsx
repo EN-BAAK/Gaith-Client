@@ -13,15 +13,12 @@ const ColorsSkeleton: React.FC = (): React.ReactNode => {
           <tbody className="divide-y divide-background2">
             {skeletonRows.map((_, index) => (
               <tr key={`color-skeleton-row-${index}`} className="animate-pulse">
-                {/* دائرة اللون */}
                 <td className="p-4">
                   <Skeleton className="w-7 h-7 rounded-full" />
                 </td>
-                {/* رمز الـ Hex */}
                 <td className="p-4">
                   <Skeleton className="h-5 w-24 rounded-md" />
                 </td>
-                {/* أزرار الإجراءات */}
                 <td className="p-4 text-left pl-6">
                   <div className="flex justify-end items-center gap-3">
                     <Skeleton className="w-10 h-8 rounded-sm" />
